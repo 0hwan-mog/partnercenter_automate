@@ -67,6 +67,6 @@ preparing_page.click()
 
 changing_first_order(number_of_order)
 
-print("알파 씨리얼핏의 결제완료 주문건중 최신순으로", number_of_order, "건을 배송중 처리했습니다.")
+print("알파 씨리얼핏의 결제완료 주문건중 최신순으로", number_of_order, "건을 '배송중' 상태로 변경했습니다.")
 
 driver.quit()
