@@ -45,7 +45,7 @@ number_of_order = int(input("몇건의 주문건을 배송중 처리할까요?")
 
 #파트너센터 로그인 정보 입력
 partnercenter_id = input("파트너센터 테스트계정을 입력하세요")
-partnercenter_password = input("파테스트계정의 비밀번호를 입력하세요")
+partnercenter_password = input("테스트계정의 비밀번호를 입력하세요")
 
 # 크롬 브라우저 실행후 씨리얼핏 알파 로그인페이지 접속
 driver = webdriver.Chrome()
