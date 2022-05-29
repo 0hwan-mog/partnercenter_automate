@@ -21,6 +21,10 @@ def changing_first_order(input_number):
                                                                                          "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(3) > div.IuQkXH8WhWwfXxZYXfA7 > div.v90TAbI9_qqLWKbM5Bes > div.W33T7liyyVLq6KNZolFE > div > table > tbody > tr:nth-child(1) > td:nth-child(9) > input")))
         invoice_number.send_keys("123")
 
+        # 주문번호 복사
+        first_order_number = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                                             "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(3) > div.IuQkXH8WhWwfXxZYXfA7 > div.v90TAbI9_qqLWKbM5Bes > div.W33T7liyyVLq6KNZolFE > div > table > tbody > tr:nth-child(1) > td:nth-child(3) > div > a"))).text
+
         # 배송중 처리
         change_to_shipping = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
                                                                                              "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(3) > div.IuQkXH8WhWwfXxZYXfA7 > div.v90TAbI9_qqLWKbM5Bes > div:nth-child(1) > div:nth-child(1) > div.v1X79mJumnJXC9NnmMpo > button:nth-child(3) > div")))
@@ -34,6 +38,7 @@ def changing_first_order(input_number):
         confirm = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "body > div:nth-child(16) > div > div > div > div.l4hwaeGnXUpN3IQf4w79 > button")))
         confirm.click()
+        print("주문번호 ", first_order_number,"을(를) 배송중 처리했습니다.")
 
 
 number_of_order = int(input("몇건의 주문건을 배송중 처리할까요?"))
