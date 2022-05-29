@@ -38,7 +38,7 @@ def changing_first_order(input_number):
         confirm = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "body > div:nth-child(16) > div > div > div > div.l4hwaeGnXUpN3IQf4w79 > button")))
         confirm.click()
-        print("주문번호 ",first_order_number,"를 배송중 처리했습니다.")
+        print("주문번호 ", first_order_number,"을(를) 배송중 처리했습니다.")
 
 
 number_of_order = int(input("몇건의 주문건을 배송중 처리할까요?"))
