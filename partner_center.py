@@ -74,6 +74,15 @@ preparing_page = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
                                                                                  "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.LdpHuutKeZBD0Zv33FBQ.false > ul.lo5J1r0wqaPRncdeDdug > li.f2TyJBK2uwv7KlKcJucW.DxstYBvlTQAE9ACUWhMQ > ul > li:nth-child(3) > span")))
 preparing_page.click()
 
+#조회기간 1달로 변경
+duration = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                                 "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(3) > div > div > div > div > div > div:nth-child(1) > div > label:nth-child(3)")))
+duration.click()
+
+searching = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                                 "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div.pypaPpeW9YidFC38ttL7 > button.vFG06QbNQRqLtuFJfjUu.primary.large.tall")))
+searching.click()
+
 changing_first_order(number_of_order)
 
 print("알파 씨리얼핏의 결제완료 주문건중 최신순으로", number_of_order, "건을 '배송중' 상태로 변경했습니다.")
