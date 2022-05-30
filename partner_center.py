@@ -66,7 +66,7 @@ password.send_keys(Keys.RETURN)
 
 # 쇼핑몰 목록에서 씨리얼핏 클릭
 crealfit = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-    (By.CSS_SELECTOR, "#app > div > div > div > div.ZHemAQSqViXlpuBI8en6 > div:nth-child(2) > a")))
+    (By.PARTIAL_LINK_TEXT, "씨리얼힛")))
 crealfit.click()
 
 # 상품준비/배송 관리 탭 이동
