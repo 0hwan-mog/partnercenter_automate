@@ -38,14 +38,18 @@ def changing_first_order(input_number):
         confirm = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, "body > div:nth-child(16) > div > div > div > div.l4hwaeGnXUpN3IQf4w79 > button")))
         confirm.click()
-        print("주문번호 ", first_order_number,"을(를) 배송중 처리했습니다.")
+        print("주문번호 ", first_order_number, "을(를) 배송중 처리했습니다.")
 
-#배송중 처리할 주문건 수 입력
-number_of_order = int(input("몇건의 주문건을 배송중 처리할까요?"))
 
-#파트너센터 로그인 정보 입력
-partnercenter_id = input("파트너센터 테스트계정을 입력하세요")
-partnercenter_password = input("테스트계정의 비밀번호를 입력하세요")
+# 파트너센터 로그인 정보 입력
+partnercenter_id = input("파트너센터 테스트계정을 입력하세요 : ")
+partnercenter_password = input("테스트계정의 비밀번호를 입력하세요 : ")
+
+# 구매자명 입력
+client_name = input("구매자명을 입력하세요 : ")
+
+# 배송중 처리할 주문건 수 입력
+number_of_order = int(input("몇건의 주문건을 배송중 처리할까요?(숫자 입력) "))
 
 # 크롬 브라우저 실행후 씨리얼핏 알파 로그인페이지 접속
 driver = webdriver.Chrome()
@@ -74,17 +78,32 @@ preparing_page = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
                                                                                  "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.LdpHuutKeZBD0Zv33FBQ.false > ul.lo5J1r0wqaPRncdeDdug > li.f2TyJBK2uwv7KlKcJucW.DxstYBvlTQAE9ACUWhMQ > ul > li:nth-child(3) > span")))
 preparing_page.click()
 
-#조회기간 1달로 변경
+# 조회기간 '1개월'로 변경
 duration = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                                                 "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(3) > div > div > div > div > div > div:nth-child(1) > div > label:nth-child(3)")))
+                                                                           "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(3) > div > div > div > div > div > div:nth-child(1) > div > label:nth-child(3)")))
 duration.click()
 
+# 구매자명 입력후 검색
+set_search_condition = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                                       "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(2) > div > div > select > option:nth-child(2)")))
+
+set_search_condition.click()
+
+name_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                             "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(2) > div > div > input")))
+
+name_field.send_keys(client_name)
+
 searching = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                                                 "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div.pypaPpeW9YidFC38ttL7 > button.vFG06QbNQRqLtuFJfjUu.primary.large.tall")))
+                                                                            "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div.pypaPpeW9YidFC38ttL7 > button.vFG06QbNQRqLtuFJfjUu.primary.large.tall")))
 searching.click()
 
-changing_first_order(number_of_order)
+# 배송중 처리
+try:
+    changing_first_order(number_of_order)
+    print("알파 씨리얼핏에 ", client_name, " 님이 1개월 이내 생성한 결제완료 주문건들중 최신순으로", number_of_order, "건을 '배송중' 상태로 변경했습니다.")
 
-print("알파 씨리얼핏의 결제완료 주문건중 최신순으로", number_of_order, "건을 '배송중' 상태로 변경했습니다.")
+except:
+    print("오류가 발생했습니다.")
 
 driver.quit()
