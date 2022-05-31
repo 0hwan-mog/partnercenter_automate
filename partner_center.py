@@ -6,6 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
 
+
+
 def changing_first_order(input_number):
     for i in range(0, input_number):
         # 첫번째 상품 선택 후 송장번호 입력
