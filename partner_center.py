@@ -81,12 +81,11 @@ preparing_page = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
                                                                                  "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.LdpHuutKeZBD0Zv33FBQ.false > ul.lo5J1r0wqaPRncdeDdug > li.f2TyJBK2uwv7KlKcJucW.DxstYBvlTQAE9ACUWhMQ > ul > li:nth-child(3) > span")))
 preparing_page.click()
 
-# 조회기간 '1개월'로 변경
-duration = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
-                                                                           "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(3) > div > div > div > div > div > div:nth-child(1) > div > label:nth-child(3)")))
-duration.click()
+# #결제완료 목록 표시될때까지 대기
+first_order = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                                      "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(3) > div.IuQkXH8WhWwfXxZYXfA7 > div.v90TAbI9_qqLWKbM5Bes > div.W33T7liyyVLq6KNZolFE > div > table > tbody > tr:nth-child(1) > td:nth-child(1) > label > span")))
 
-# 구매자명 입력후 검색
+# 구매자명 입력
 set_search_condition = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
                                                                                        "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(2) > div > div > select > option:nth-child(2)")))
 
@@ -97,11 +96,23 @@ name_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.
 
 name_field.send_keys(client_name)
 
+# 조회기간 '1개월'로 변경
+duration = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                           "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div:nth-child(3) > div > div > div > div > div > div:nth-child(1) > div > label:nth-child(3)")))
+duration.click()
+
+#검색 버튼 클릭
+searching = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
+                                                                            "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div.pypaPpeW9YidFC38ttL7 > button.vFG06QbNQRqLtuFJfjUu.primary.large.tall")))
+searching.click()
+
 searching = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR,
                                                                             "#MainFrame > div.BjciI0DwH9nqgG3nq4qb > div.PqoW0UJNFISUjXDn9nGX.false > div.react-in-mithril > div > div > div:nth-child(2) > div.B46HCxUGYe2MMxeYwhrg > form > div.pypaPpeW9YidFC38ttL7 > button.vFG06QbNQRqLtuFJfjUu.primary.large.tall")))
 searching.click()
 
 # 배송중 처리
+
+
 try:
     changing_first_order(number_of_order)
     print("알파 씨리얼핏에", client_name, "님이 1개월 이내 생성한 결제완료 주문건들중 최신순으로", number_of_order, "건을 '배송중' 상태로 변경했습니다.")
